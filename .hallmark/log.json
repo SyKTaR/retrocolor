@@ -1,0 +1,24 @@
+[
+  {
+    "date": "2026-05-27",
+    "macrostructure": "Manifesto",
+    "theme": "custom",
+    "theme_axes": "light / display-condensed-bold / warm",
+    "vibe": "industrial artisan, Gulf racing, orange fire, propre",
+    "enrichment": "none (typography only)",
+    "nav": "N9 Edge-aligned minimal",
+    "footer": "Ft4 Dense typographic",
+    "brief": "Retro Color · redesign landing page · tone: declaration"
+  },
+  {
+    "date": "2026-05-26",
+    "macrostructure": "Split Studio",
+    "theme": "custom",
+    "theme_axes": "light / display-condensed-bold / warm",
+    "vibe": "industrial artisan, Gulf racing, orange fire, propre",
+    "enrichment": "Tier A CSS art (hero diagonal Gulf)",
+    "nav": "N1 (logo-left, links-center, cta-right)",
+    "footer": "Ft5 Statement",
+    "brief": "Retro Color · peinture industrielle, sablage & finitions"
+  }
+]
