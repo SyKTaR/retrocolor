@@ -334,8 +334,11 @@
   display: flex;
 }
 
+/* Pointer-events: none also blocks text selection, so the copy opts back in. */
 .hero-inner a,
-.hero-inner button { pointer-events: auto; }
+.hero-inner button,
+.hero-inner .hero-title,
+.hero-inner .hero-text { pointer-events: auto; }
 
 @media (min-width: 768px) {
   .hero { padding-top: 4rem; }
