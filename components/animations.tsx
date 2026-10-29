@@ -46,7 +46,7 @@ export function Animations({ children }: { children: ReactNode }) {
             const lines = self.lines as HTMLElement[];
             const timeline = gsap.timeline({
               delay: hero ? 0.2 : 0,
-              ...(hero ? {} : { scrollTrigger: { trigger: element, start: "top 88%", toggleActions: "play none none none" } }),
+              ...(hero ? {} : { scrollTrigger: { trigger: element, start: "top 97%", toggleActions: "play none none none" } }),
             });
             gsap.set(element, { autoAlpha: 1 });
             let cursor = 0;
@@ -82,26 +82,26 @@ export function Animations({ children }: { children: ReactNode }) {
         const hero = element.dataset.blur === "hero";
         gsap.fromTo(element, blurIn, {
           ...sharp, duration: 0.9, ease: "power2.out", delay: hero ? 0.9 : 0,
-          ...(hero ? {} : { scrollTrigger: { trigger: element, start: "top 88%", toggleActions: "play none none none" } }),
+          ...(hero ? {} : { scrollTrigger: { trigger: element, start: "top 97%", toggleActions: "play none none none" } }),
         });
       });
 
       gsap.fromTo(all(root, '[data-anim="hero-fade"]'), blurIn, { ...sharp, duration: 0.9, ease: "power2.out", stagger: 0.12, delay: 1.3 });
       all<HTMLElement>(root, '[data-anim="fade-up"]').forEach((element) => {
-        gsap.fromTo(element, blurIn, { ...sharp, duration: 0.9, ease: "power2.out", scrollTrigger: { trigger: element, start: "top 88%", toggleActions: "play none none none" } });
+        gsap.fromTo(element, blurIn, { ...sharp, duration: 0.9, ease: "power2.out", scrollTrigger: { trigger: element, start: "top 97%", toggleActions: "play none none none" } });
       });
       all<HTMLElement>(root, '[data-anim="reveal"]').forEach((element) => {
-        gsap.fromTo(element, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.3, ease: "expo.inOut", scrollTrigger: { trigger: element, start: "top 88%", toggleActions: "play none none none" } });
+        gsap.fromTo(element, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "expo.out", scrollTrigger: { trigger: element, start: "top 97%", toggleActions: "play none none none" } });
       });
 
       const rack = root.querySelector<HTMLElement>("[data-rack]");
       if (rack) {
         const rail = rack.querySelector<HTMLElement>("[data-rack-rail]");
         const cards = all<HTMLElement>(rack, "[data-rack-item]");
-        const timeline = gsap.timeline({ scrollTrigger: { trigger: rack, start: "top 80%", toggleActions: "play none none none" } });
+        const timeline = gsap.timeline({ scrollTrigger: { trigger: rack, start: "top 96%", toggleActions: "play none none none" } });
         if (rail && rail.offsetWidth) timeline.from(rail, { scaleX: 0, duration: 1.1, ease: "expo.inOut" }, 0);
         cards.forEach((card, index) => {
-          const at = 0.45 + index * 0.12;
+          const at = 0.25 + index * 0.1;
           timeline.from(card.querySelector(".service-hook"), { scaleY: 0, duration: 0.5, ease: "power2.out" }, at)
             .from(card.querySelector("[data-panel]"), { yPercent: -10, autoAlpha: 0, rotation: index % 2 ? 6 : -6, duration: 1.8, ease: "elastic.out(1, 0.4)" }, at + 0.25)
             .from(card.querySelector(".service-sheet"), { y: 24, autoAlpha: 0, duration: 0.9, ease: "power3.out" }, at + 0.45);
@@ -126,10 +126,10 @@ export function Animations({ children }: { children: ReactNode }) {
           const rail = columns === 6
             ? steps.querySelector<HTMLElement>("[data-process-rail]")
             : row.map((card) => card.querySelector<HTMLElement>("[data-step-rail]"));
-          const timeline = gsap.timeline({ scrollTrigger: { trigger: row[0], start: "top 82%", toggleActions: "play none none none" } });
+          const timeline = gsap.timeline({ scrollTrigger: { trigger: row[0], start: "top 96%", toggleActions: "play none none none" } });
           if (rail) timeline.from(rail, { scaleX: 0, duration: 0.8, ease: "power2.inOut", stagger: 0.08 }, 0);
           row.forEach((card, index) => {
-            const at = 0.3 + index * 0.13;
+            const at = 0.15 + index * 0.1;
             timeline.from(card.querySelector(".process-hook"), { scaleY: 0, duration: 0.45, ease: "power2.out" }, at)
               .from(card.querySelector(".process-panel"), { yPercent: -8, autoAlpha: 0, rotation: index % 2 ? 5 : -5, duration: 1.25, ease: "elastic.out(1, 0.48)" }, at + 0.16)
               .from(card.querySelector(".process-step-body"), { y: 18, autoAlpha: 0, duration: 0.7, ease: "power3.out" }, at + 0.36);
@@ -144,15 +144,15 @@ export function Animations({ children }: { children: ReactNode }) {
         if (!media) return;
         const siblings = work.parentElement?.children;
         const delay = siblings ? Array.from(siblings).indexOf(work) * 0.12 : 0;
-        const timeline = gsap.timeline({ delay, scrollTrigger: { trigger: work, start: "top 85%", toggleActions: "play none none none" } });
-        timeline.fromTo(media, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.3, ease: "expo.inOut" }, 0);
+        const timeline = gsap.timeline({ delay, scrollTrigger: { trigger: work, start: "top 97%", toggleActions: "play none none none" } });
+        timeline.fromTo(media, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "expo.out" }, 0);
         if (picture) timeline.from(picture, { scale: 1.25, duration: 1.7, ease: "expo.out" }, 0.1);
         if (caption) timeline.from(caption, { y: 12, autoAlpha: 0, duration: 0.8, ease: "power3.out" }, 0.75);
         if (picture) gsap.fromTo(picture, { yPercent: -5 }, { yPercent: 5, ease: "none", scrollTrigger: { trigger: work, start: "top bottom", end: "bottom top", scrub: true } });
       });
 
       const faq = root.querySelector<HTMLElement>("[data-faq]");
-      if (faq) gsap.from(all(faq, "[data-faq-item]"), { y: 24, autoAlpha: 0, duration: 0.9, ease: "power3.out", stagger: 0.08, scrollTrigger: { trigger: faq, start: "top 82%", toggleActions: "play none none none" } });
+      if (faq) gsap.from(all(faq, "[data-faq-item]"), { y: 24, autoAlpha: 0, duration: 0.9, ease: "power3.out", stagger: 0.08, scrollTrigger: { trigger: faq, start: "top 96%", toggleActions: "play none none none" } });
       ScrollTrigger.refresh();
     });
 

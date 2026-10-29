@@ -305,48 +305,27 @@
 }
 
 .hero {
+  /* HeroWorkshop (3D) layer is absolutely positioned inside this section. */
+  position: relative;
   isolation: isolate;
-  overflow: clip;
+  overflow: hidden;
   background: #fff;
-  /* Header occupies roughly 5rem in normal flow. Content can grow at text zoom. */
-  min-height: calc(100svh - 5rem);
+  /* Same scene height as the V3 reference (940px section, 128px above the copy):
+     the ~5rem header sits in normal flow, so subtract it here. */
+  min-height: max(calc(100svh - 5rem), 876px);
   padding-top: 3.25rem;
-  padding-bottom: 4.5rem;
-}
-
-.hero-scene,
-.hero-scene-canvas,
-.hero-scene canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.hero-scene-canvas {
-  z-index: 0;
-}
-
-.hero-scene canvas {
-  display: block;
-}
-
-/* Fade the floor and long conveyor into the surrounding white page. */
-.hero-scene::after {
-  content: "";
-  z-index: 1;
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to top, #fff, #fff0 64px),
-    linear-gradient(to right, #fff 0%, #fff0 5%, #fff0 78%, #fff 99%);
+  padding-bottom: 0;
+  /* Fiche d'étape fonts follow the site. */
+  --rcw-display: var(--font--display);
+  --rcw-body: var(--font--body);
 }
 
 .hero-inner {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   isolation: isolate;
+  /* Text sits above the 3D layer but lets the mouse through to it; CTAs stay clickable. */
+  pointer-events: none;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
   text-align: center;
@@ -355,16 +334,15 @@
   display: flex;
 }
 
+.hero-inner a,
+.hero-inner button { pointer-events: auto; }
+
 @media (min-width: 768px) {
   .hero { padding-top: 4rem; }
 }
 
 @media (min-width: 992px) {
-  .hero {
-    /* At 720px high, leave room for the header instead of forcing 680px + nav. */
-    min-height: min(60rem, calc(100svh - 5rem));
-    padding-top: calc(clamp(2rem, 4svh, 3rem) + 1.5rem);
-  }
+  .hero { padding-top: calc(clamp(2rem, 4svh, 3rem) + 1.5rem); }
 }
 
 /* Short desktop screens (720-800px high): smaller H1 on two lines and tighter
@@ -408,18 +386,6 @@
   flex-direction: column;
   align-items: center;
   display: flex;
-}
-
-/* A soft local veil follows the copy, leaving the sides and lower action clear.
-   Its central 96% white protects text contrast even above a dark moving part. */
-.hero-body::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: -1.5rem -4rem -3rem;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgb(255 255 255 / 96%) calc(100% - 3rem), #fff0);
-  mask-image: linear-gradient(to right, #0000, #000 8%, #000 92%, #0000);
 }
 
 .hero-text {
@@ -2332,10 +2298,9 @@ button.button { border: 0; cursor: pointer; }
   .nav-menu { max-height: calc(100dvh - 88px); }
 }
 
-/* Phones: no 3D background (see hero-scene-loader.tsx). Hero is sized by its copy. */
-@media (max-width: 767px) {
-  .hero-scene { display: none; }
-  .hero { min-height: 0; padding-bottom: 3rem; }
+/* Phones (<760px): V3 phone mode (short card + 01–06 buttons) inside the taller hero. */
+@media (max-width: 759px) {
+  .hero { min-height: max(calc(100svh - 5rem), 812px); }
 }
 
 /* Écran d'entrée : compteur puis rideau orange à bord crénelé. */
