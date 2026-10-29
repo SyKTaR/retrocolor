@@ -308,45 +308,18 @@
   isolation: isolate;
   overflow: clip;
   background: #fff;
-  /* Header occupies roughly 5rem in normal flow. Content can grow at text zoom. */
-  min-height: calc(100svh - 5rem);
+  /* L'atelier 3D (components/hero-workshop) occupe l'espace sous le texte. */
+  min-height: max(100svh, 940px);
   padding-top: 3.25rem;
-  padding-bottom: 4.5rem;
-}
-
-.hero-scene,
-.hero-scene-canvas,
-.hero-scene canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.hero-scene-canvas {
-  z-index: 0;
-}
-
-.hero-scene canvas {
-  display: block;
-}
-
-/* Fade the floor and long conveyor into the surrounding white page. */
-.hero-scene::after {
-  content: "";
-  z-index: 1;
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to top, #fff, #fff0 64px),
-    linear-gradient(to right, #fff 0%, #fff0 5%, #fff0 78%, #fff 99%);
+  padding-bottom: 0;
 }
 
 .hero-inner {
   position: relative;
   z-index: 2;
   isolation: isolate;
+  /* Le texte passe au-dessus de la 3D mais laisse la souris atteindre la scène, sauf sur les liens. */
+  pointer-events: none;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
   text-align: center;
@@ -361,8 +334,6 @@
 
 @media (min-width: 992px) {
   .hero {
-    /* At 720px high, leave room for the header instead of forcing 680px + nav. */
-    min-height: min(60rem, calc(100svh - 5rem));
     padding-top: calc(clamp(2rem, 4svh, 3rem) + 1.5rem);
   }
 }
@@ -433,6 +404,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.hero-inner a,
+.hero-inner button {
+  pointer-events: auto;
 }
 
 .hero-actions .text-link {
@@ -2332,10 +2308,9 @@ button.button { border: 0; cursor: pointer; }
   .nav-menu { max-height: calc(100dvh - 88px); }
 }
 
-/* Phones: no 3D background (see hero-scene-loader.tsx). Hero is sized by its copy. */
-@media (max-width: 767px) {
-  .hero-scene { display: none; }
-  .hero { min-height: 0; padding-bottom: 3rem; }
+/* Phones: l'atelier 3D passe en mise en page mobile (fiche et boutons 01 à 06 en bas). */
+@media (max-width: 759px) {
+  .hero { min-height: max(100svh, 860px); }
 }
 
 /* Écran d'entrée : compteur puis rideau orange à bord crénelé. */

@@ -20,8 +20,7 @@
     "next": "^16.4.3",
     "nodemailer": "^10.2.1",
     "react": "^19.3.1",
-    "react-dom": "^19.3.1",
-    "three": "0.170.0"
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.64.1",
@@ -30,7 +29,6 @@
     "@types/nodemailer": "^8.0.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@types/three": "0.170.0",
     "postcss": "^8.5.31",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"

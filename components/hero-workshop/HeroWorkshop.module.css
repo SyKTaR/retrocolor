@@ -1,0 +1,8 @@
+/* Calque 3D : couvre toute la section héros, sous le texte. */
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Polices des fiches d'étape : celles du site par défaut. Pour forcer :
+     --rcw-display: var(--font-titre); --rcw-body: var(--font-texte); */
+}
