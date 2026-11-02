@@ -14,7 +14,7 @@ export function Services() {
           <span className={`service-panel-tag${service.tagDark ? " is-dark" : ""}`}>{service.tag}</span>
         </div>
         <div className="service-sheet"><div className="service-sheet-head"><h3 className="heading-s">{service.title}</h3><p className="text-body">{service.description}</p></div>
-          {service.specs.map((spec, index) => <div key={spec.label} className={`spec-row${index === service.specs.length - 1 ? " is-last" : ""}`}><span className="spec-label">{spec.label}</span><span className="spec-value">{spec.value}</span></div>)}
+          <div className="service-specs">{service.specs.map((spec, index) => <div key={spec.label} className={`spec-row${index === service.specs.length - 1 ? " is-last" : ""}`}><span className="spec-label">{spec.label}</span><span className="spec-value">{spec.value}</span></div>)}</div>
         </div>
       </article>)}
     </div></div>

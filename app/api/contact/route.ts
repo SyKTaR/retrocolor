@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
+import { renderQuoteEmail } from "@/lib/contact-email";
 
 export const runtime = "nodejs";
 
@@ -70,20 +71,8 @@ export async function POST(request: Request) {
     return fail("Le formulaire est temporairement indisponible. Merci de réessayer plus tard.", 500);
   }
 
-  const text = [
-    "Nouvelle demande de devis depuis le site Rétro Color",
-    "",
-    `Nom : ${nom}`,
-    `Entreprise : ${entreprise || "Non renseignée"}`,
-    `Téléphone : ${telephone}`,
-    `Email : ${email}`,
-    `Prestation : ${prestation || "Non renseignée"}`,
-    `Teinte souhaitée : ${teinte || "Non renseignée"}`,
-    `Date : ${new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" })} (Paris)`,
-    "",
-    "Pièce :",
-    piece || "Non renseignée",
-  ].join("\n");
+  const photos = files.map((f, i) => ({ cid: `photo-${i}@retrocolor`, filename: f.name }));
+  const { html, text } = renderQuoteEmail({ nom, entreprise, telephone, email, prestation, teinte, piece, receivedAt: new Date(), photos });
 
   try {
     const transport = nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } });
@@ -91,14 +80,16 @@ export async function POST(request: Request) {
       from,
       to,
       replyTo: email,
-      subject: `Demande de devis — ${nom}`,
+      subject: `Demande de devis — ${nom.replace(/\s+/g, " ")}${prestation ? ` (${prestation.replace(/\s+/g, " ")})` : ""}`,
       text,
+      html,
       attachments: await Promise.all(
-        files.map(async (f) => ({ filename: f.name, content: Buffer.from(await f.arrayBuffer()), contentType: f.type })),
+        files.map(async (f, i) => ({ filename: f.name, content: Buffer.from(await f.arrayBuffer()), contentType: f.type, cid: photos[i].cid })),
       ),
     });
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (error) {
+    console.error("[contact] envoi SMTP échoué", error);
     return fail("L’envoi a échoué. Merci de réessayer plus tard ou d’appeler l’atelier.", 500);
   }
 }
