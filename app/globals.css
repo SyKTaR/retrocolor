@@ -1209,8 +1209,14 @@
   grid-row-gap: 48px;
   grid-template-rows: auto;
   grid-template-columns: 1fr 588px;
-  align-items: center;
+  align-items: stretch;
   display: grid;
+}
+
+.contact-info .is-map {
+  height: auto;
+  min-height: 240px;
+  flex: 1 1 240px;
 }
 
 .contact-info {
@@ -1218,6 +1224,11 @@
   grid-row-gap: 40px;
   flex-direction: column;
   display: flex;
+}
+
+.contact-head h2, .faq-intro h2 {
+  /* Haut des capitales aligné sur le bord haut de la colonne voisine. */
+  text-box: trim-start cap alphabetic;
 }
 
 .contact-head {
@@ -1328,6 +1339,11 @@
   flex-direction: column;
   margin-bottom: 0;
   display: flex;
+  flex: 1;
+}
+
+.quote-form > .button {
+  margin-top: auto;
 }
 
 .form-row {
