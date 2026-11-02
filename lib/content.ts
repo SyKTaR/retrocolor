@@ -81,5 +81,5 @@ export const faqs = [
   { question: "Poudre ou liquide, que choisir ?", answer: "La poudre résiste mieux aux chocs et à la corrosion. Le liquide convient aux teintes très spécifiques et aux pièces qui ne supportent pas la cuisson." },
   { question: "Faut-il préparer la pièce avant de la déposer ?", answer: "Non, le décapage fait partie de la prestation. Retirez seulement les joints, caoutchoucs et plastiques quand c’est possible." },
   { question: "Quel est le délai ?", answer: "Il dépend du volume et des étapes nécessaires. Il figure sur le devis et il est confirmé au dépôt de la pièce." },
-  { question: "Travaillez-vous pour les particuliers ?", answer: "Oui : jantes, motos en restauration, mobilier de jardin, pièces de collection." },
+  { question: "Travaillez-vous pour les particuliers ?", answer: "Oui, nous travaillons à la fois pour les professionnels et pour les particuliers." },
 ] as const;
