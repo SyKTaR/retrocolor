@@ -497,6 +497,32 @@
   display: flex;
 }
 
+@media (min-width: 768px) {
+  .service-card {
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+    justify-items: center;
+  }
+
+  .service-card .service-sheet {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+    justify-items: stretch;
+  }
+
+  .service-card .service-sheet-head {
+    min-height: 0;
+  }
+}
+
+.service-specs {
+  width: 100%;
+}
+
 .service-hook {
   background-color: var(--color--ink);
   transform-origin: 50% 0;
@@ -788,6 +814,13 @@
 .process-panel-check svg {
   width: 21px;
   height: 21px;
+}
+
+@media (min-width: 768px) {
+  /* Plaquette et texte partagent le même bord gauche. */
+  .process-step { align-items: flex-start; }
+  .process-hook { margin-left: 83px; }
+  .process-panel { margin-left: 20px; }
 }
 
 .process-step-body {
@@ -1208,7 +1241,7 @@
   grid-column-gap: 126px;
   grid-row-gap: 48px;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 588px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 588px);
   align-items: stretch;
   display: grid;
 }
@@ -1350,11 +1383,12 @@
   grid-column-gap: 16px;
   grid-row-gap: 20px;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   display: grid;
 }
 
 .form-field {
+  min-width: 0;
   grid-column-gap: 8px;
   grid-row-gap: 8px;
   flex-direction: column;
@@ -1619,9 +1653,23 @@
 }
 
 @media screen and (min-width: 992px) and (max-width: 1279px) {
-  .nav {
-    padding-left: 24px;
-    padding-right: 24px;
+  /* Même gouttière pour le header et le contenu : les bords restent alignés. */
+  .nav, .section {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+
+  .contact-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-column-gap: 48px;
+  }
+
+  .quote-card {
+    padding: 32px;
+  }
+
+  .faq-inner {
+    grid-column-gap: 64px;
   }
 
   .nav-link {
@@ -1760,6 +1808,15 @@
   }
 
   .contact {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .services {
+    padding-bottom: 96px;
+  }
+
+  .works {
     padding-top: 96px;
     padding-bottom: 96px;
   }
@@ -2225,7 +2282,7 @@ button.button { border: 0; cursor: pointer; }
   .service-panel-tag { left: 8px; bottom: 8px; right: 6px; font-size: 11px; line-height: 14px; }
   .service-panel-before { left: 8px; font-size: 11px; }
   .spec-label { width: 68px; font-size: 12px; }
-  .spec-value { font-size: 13px; }
+  .spec-value { font-size: 13px; min-width: 0; overflow-wrap: anywhere; }
   .cta-banner { gap: 20px; }
   .cta-banner .button { width: 100%; }
 
